@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> userManager
+@model IEnumerable<Lesson49MVC.Models.User>
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+
+<table class="table">
+    <tr><th>Email</th><th>Год</th><th></th></tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>@user.DateOfBirth</td>
+            <td>
+                <form asp-controller="Roles" asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-controller="Roles" asp-action="Edit" asp-route-id="@user.Id">Изменить роль</a>
+                    <a class="btn btn-sm btn-danger" asp-controller="Roles" asp-action="LockUser" asp-route-id="@user.Id">Заблокировать</a>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
